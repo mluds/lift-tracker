@@ -1,4 +1,4 @@
-var app = require('./app.js');
+const app = require('./app.js');
 require('./views.js');
 
 app.listen(3000);

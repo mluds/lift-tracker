@@ -11,21 +11,4 @@
 
     - name: Install npm dependencies
       npm:
-        name: '{{item}}'
-      with_items:
-        - express
-        - mongoose
-        - react
-        - react-dom
-        - webpack
-        - babel-core
-        - babel-loader
-        - babel-preset-es2015
-        - babel-preset-react
-  
-    - name: Install global npm dependencies
-      npm:
-        name: '{{item}}'
-        global: true
-      with_items:
-        - nodemon
+        path: /vagrant
