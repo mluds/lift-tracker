@@ -1,0 +1,13 @@
+{
+  "exercises": [{
+    "name": "Deadlift"
+  }, {
+    "name": "Squats"
+  }, {
+    "name": "Dumbbell Curls"
+  }, {
+    "name": "Rowing Machine"
+  }, {
+    "name": "Leg Extensions"
+  }]
+}

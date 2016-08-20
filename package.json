@@ -21,6 +21,19 @@
   },
   "scripts": {
     "webpack": "./node_modules/.bin/webpack -w &",
-    "nodemon": "./node_modules/.bin/nodemon ./server/server.js &"
+    "nodemon": "./node_modules/.bin/nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js &"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015"
+    ],
+    "ignore": [
+      "node_modules"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.13.2"
   }
 }

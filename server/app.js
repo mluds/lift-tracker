@@ -1,7 +1,5 @@
-const express = require('express');
+import express from 'express';
 
-var app = express();
+export var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
-
-module.exports = app;
