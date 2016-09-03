@@ -1,4 +1,4 @@
-import { app } from './app.js';
-import './views.js';
+const app = require('./app.js').app;
+require('./views.js');
 
 app.listen(3000);

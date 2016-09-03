@@ -1,13 +1,16 @@
 - hosts: default
   tasks:
+    - name: Install node repo
+      shell: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
     - name: Install APT dependencies
       become: true
       apt:
         name: '{{item}}'
       with_items:
         - nodejs
-        - nodejs-legacy
-        - npm
+        - mongodb
+        - build-essential
 
     - name: Install npm dependencies
       npm:

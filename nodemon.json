@@ -1,6 +1,8 @@
 {
   "watch": [
-    "server/"
+    "server/",
+    "views/"
   ],
+  "ext": "js html",
   "legacyWatch": true
 }

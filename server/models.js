@@ -1,21 +1,21 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost/lift-tracker');
 
-export var User = mongoose.model('User', {
-    gid: String,
-    gender: String
+exports.User = mongoose.model('User', {
+    googleId: { type: String, unique: true }
 });
 
-export var Exercise = mongoose.model('Exercise', {
+exports.Exercise = mongoose.model('Exercise', {
     name: { type: String, unique: true }
 });
 
-export var Set = mongoose.model('Set', {
-    user_id: Schema.Types.ObjectId,
-    ex_id: Schema.Types.ObjectId,
+exports.Set = mongoose.model('Set', {
+    userId: Schema.Types.ObjectId,
+    exerciseId: Schema.Types.ObjectId,
     reps: Number,
     weight: Number,
-    duration: Number,
     created: { type: Date, default: Date.now }
 });
