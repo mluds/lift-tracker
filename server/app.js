@@ -6,11 +6,13 @@ const passport = require('passport');
 const passportGoogle = require('passport-google-oauth');
 const mongoose = require('mongoose');
 const User = require('./models.js').User;
+const bodyParser = require('body-parser');
+const Promise = require('bluebird');
 
 var app = express();
 var MongoStore = sessionStore(session);
 
-app.use(express.static('static'));
+app.use(express.static('dist'));
 app.use(session({
     resave: true,
     saveUninitialized: true,
@@ -23,6 +25,7 @@ app.use(session({
         mongooseConnection: mongoose.connection
     })
 }));
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -36,20 +39,18 @@ passport.use(new passportGoogle.OAuth2Strategy({
     clientSecret: 'mh8DIU6mhMYuyywNW4HJ7VAu',
     callbackURL: 'http://127.0.0.1:3000/auth/google/callback'
 }, (accessToken, refreshToken, profile, done) => {
-    User.findOne({ googleId: profile.id }, (err, user) => {
-        if (err) {
-            return done(err);
-        }
+    User.findOne({
+        googleId: profile.id
+    }).then(user => {
         if (user) {
-            return done(err, user);
+            return Promise.resolve(user);
         } else {
-            User.create({
+            return User.create({
                 googleId: profile.id
-            }, (err, user) => {
-                if (err) { return done(err); }
-                return done(null, user);
             });
         }
+    }).then(user => {
+        done(null, user);
     });
 }));
 passport.serializeUser((user, done) => {

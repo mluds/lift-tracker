@@ -10,7 +10,7 @@ function loggedIn(req, res, next) {
     }
 }
 
-app.get(['/', '/exercises', '/xd/xd'], loggedIn, (req, res) => {
+app.get(['/', '/lifts', '/lifts/add', '/splits', '/charts'], loggedIn, (req, res) => {
     res.render('app.html');
 });
 
