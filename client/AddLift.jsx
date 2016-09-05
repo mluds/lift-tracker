@@ -1,34 +1,35 @@
-import React from 'react';
-import { browserHistory } from 'react-router';
+import { h, Component } from 'preact';
+import { route } from 'preact-router';
 import 'whatwg-fetch';
+import { observer } from 'mobx-react';
 
-export default class AddLift extends React.Component {
+@observer
+export default class AddLift extends Component {
   constructor() {
     super();
-    this.state = { name: '' };
+    this.state.name = '';
   }
 
-  addLift() {
-    fetch('/lifts/add', {
-      method: 'post',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: this.state.name
-      })
-    }).then(res => {
-      browserHistory.push('/lifts');
+  onClick(e) {
+    this.props.store.addLift(this.state.name).then(() => {
+      return this.props.store.fetchLifts();
+    }).then(() => {
+      route('/lifts');
     });
   }
 
   render() {
+    const store = this.props.store;
     return (
       <div>
         <input
           type="text"
           onChange={e => this.setState({ name: e.target.value })}
         />
-        <button onClick={() => this.addLift()}>Add</button>
+        <div>
+          <button
+            onClick={e => this.onClick(e)}>Add</button>
+        </div>
       </div>
     );
   }

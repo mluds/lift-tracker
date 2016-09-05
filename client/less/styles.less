@@ -1,0 +1,77 @@
+@blue: #33C3F0;
+@light-gray: #e1e1e1;
+@base-size: 1.2rem;
+
+
+body {
+  color: black;
+  margin: 1em auto;
+  max-width: 30em;
+  padding: 0 .62em;
+  font-size: @base-size;
+  line-height: 1.62;
+  font-family: sans-serif;
+}
+
+
+// Nav Bar
+nav {
+  border: 1px;
+  border-color: @blue;
+  margin-bottom: 1em;
+}
+
+nav a {
+  color: black;
+  padding: @base-size/2;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: white;
+  background-color: @blue;
+}
+
+
+// Lists
+.list {
+  padding-left: 0;
+}
+
+.list li:first-child {
+  border-top: 1px solid @light-gray;
+}
+
+.list li {
+  cursor: pointer;
+  display: block;
+  border-bottom: 1px solid @light-gray;
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+
+
+// Buttons
+button {
+  height: @base-size*2;
+  padding: 0 @base-size/2;
+  font-size: 1em;
+  color: white;
+  background-color: @blue;
+  border: 0px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none
+}
+
+
+input {
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid @light-gray;
+  height: @base-size * 2;
+  padding: 0 .5em;
+}

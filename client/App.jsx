@@ -1,17 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router';
+import { h, Component } from 'preact';
+import Router from 'preact-router';
+import Header from './Header.jsx';
+import Lifts from './Lifts.jsx';
+import AddLift from './AddLift.jsx';
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <div>
-        <div>
-          <span><Link to={'/'}>Lift Tracker</Link></span>
-          <span><Link to={'/lifts'}>Lifts</Link></span>
-          <span><Link to={'/splits'}>Splits</Link></span>
-          <span><Link to={'/charts'}>Charts</Link></span>
-        </div>
-        {this.props.children}
+        <Header />
+        <Router>
+          <Lifts path="/lifts" store={this.props.store} />
+          <AddLift path="/lifts/add" store={this.props.store} />
+        </Router>
       </div>
     );
   }

@@ -2,6 +2,12 @@ const app = require('./app.js').app;
 const models = require('./models.js');
 const Lift = models.Lift;
 
+app.get('/lifts/data', (req, res) => {
+    Lift.find().select('name').then(lifts => {
+        res.send(lifts);
+    });
+});
+
 app.post('/lifts/add', (req, res) => {
     // Find a lift by name
     Lift.findOne({

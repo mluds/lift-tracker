@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './client/main.jsx',
+  entry: path.join(__dirname, 'client', 'entry.jsx'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.min.js'
@@ -16,11 +16,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style!css'
       },
       {
-        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url'
+        test: /\.less$/,
+        loader: 'style!css!less'
       }
     ]
   },
@@ -28,15 +28,16 @@ module.exports = {
     poll: 3000
   },
   plugins: [
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': JSON.stringify('production'),
-    //   }
-    // }),
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
     //     warnings: false
     //   }
     // })
-  ]
+  ],
+  resolve: {
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
+  }
 };

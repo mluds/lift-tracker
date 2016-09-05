@@ -1,16 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router';
+import { h, Component } from 'preact';
+import { route } from 'preact-router';
+import { observer } from 'mobx-react';
 
-export default class Lifts extends React.Component {
+@observer
+export default class Lifts extends Component {
   render() {
+    const lifts = this.props.store.lifts.map(lift => {
+      return (
+        <li onClick={e => route(`/lifts/${lift._id}`)}>
+          <div>{lift.name}</div>
+        </li>
+      );
+    });
     return (
       <div>
-        <div>
-          <div><Link to={'/lifts/squats'}>Squats</Link></div>
-          <div>Bench Press</div>
-          <div>Dumb Bell Curls</div>
-        </div>
-        <Link to={'/lifts/add'}>Add a Lift</Link>
+        <ul className="list">{lifts}</ul>
+        <button onClick={e => route('/lifts/add')}>Add a Lift</button>
       </div>
     );
   }
